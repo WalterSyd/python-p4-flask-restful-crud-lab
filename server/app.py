@@ -60,6 +60,14 @@ class PlantByID(Resource):
 
         return make_response(plant.to_dict(), 200)
 
+    def delete(self, id):
+        plant = Plant.query.filter_by(id=id).first()
+        db.session.delete(plant)
+        db.session.commit()
+
+        return make_response('', 204)
+
+
 api.add_resource(PlantByID, '/plants/<int:id>')
 
 
